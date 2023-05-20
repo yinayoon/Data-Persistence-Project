@@ -5,27 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
+public class MenuUtils : MonoBehaviour
 {
-    [Header ("- GUI")]
-    public Text _bestScoreText;
-    public InputField _nameInputField;
+    public Text bestScore;
 
-    private void Awake()
-    {
-
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        DataPersistenceManager.UserName = _nameInputField.text;
+        bestScore.text = $"Best Score : {DataPersistenceManager.Instance.BestUser} : {DataPersistenceManager.Instance.BestScore.ToString()}";
     }
 
     public void StartNew()

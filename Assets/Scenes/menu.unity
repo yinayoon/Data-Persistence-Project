@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb0f60d9e8191b4794a050e00e29a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BestScore: 10
 --- !u!4 &28792829
 Transform:
   m_ObjectHideFlags: 0
@@ -409,7 +410,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2076287319}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuUtils, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
@@ -1077,7 +1078,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2076287319}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuUtils, Assembly-CSharp
         m_MethodName: StartNew
         m_Mode: 1
         m_Arguments:
@@ -1245,11 +1246,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2076287317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25fd841fa367b40419ec7286a9cec56e, type: 3}
+  m_Script: {fileID: 11500000, guid: c10ef506f0ad94f409496e5cb09cbff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bestScoreText: {fileID: 1957555045}
-  _nameInputField: {fileID: 2087292474}
 --- !u!1 &2087292472
 GameObject:
   m_ObjectHideFlags: 0

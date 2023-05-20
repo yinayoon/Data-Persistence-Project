@@ -5,12 +5,14 @@ using System.IO;
 
 public class DataPersistenceManager : MonoBehaviour
 {
+    // Start() and Update() methods deleted - we don't need them right now
+
     public static DataPersistenceManager Instance;
 
-    public static string UserName;
+    public string BestUser;
+    public int BestScore; // new variable declared
 
-    public string bestUserName;
-    public int bestScore;
+    public static int BestUserScore;
 
     private void Awake()
     {
@@ -24,41 +26,45 @@ public class DataPersistenceManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        LoadData();
     }
 
     private void Start()
     {
-        SaveInfo();
+        
     }
 
     [System.Serializable]
-    class SaveData
+    class Data
     {
-        public string BestUserName;
+        public string BestUser;
         public int BestScore;
     }
 
-    public void SaveInfo()
+    public void SaveData()
     {
-        SaveData data = new SaveData();
-
-        data.BestUserName = "1"; //MainManager.BestUserName;
-        data.BestScore = 1;  //MainManager.BestScore;
+        Data data = new Data();
+        data.BestUser = MainManager.BestName;
+        data.BestScore = MainManager.BestScore;
 
         string json = JsonUtility.ToJson(data);
 
-        Debug.Log(json);
-
-        File.WriteAllText(Application.persistentDataPath + "/saveinfofile.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
-    public void LoadInfo()
+    public void LoadData()
     {
-        string path = Application.persistentDataPath + "/saveinfofile.json";
+        string path = Application.persistentDataPath + "/savefile.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            Data data = JsonUtility.FromJson<Data>(json);
+
+            BestUser = data.BestUser;
+            BestScore = data.BestScore;
+
+            Debug.Log(BestScore);
         }
     }
 }

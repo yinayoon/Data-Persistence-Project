@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,22 +20,11 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    public static string BestUserName;
+    public static string BestName;
     public static int BestScore;
+    private int allScore;
 
-    public DataPersistenceManager dataPersistenceManager;
     public GameObject brickPrefabGroup;
-
-    private void Awake()
-    {
-        GameObject go = GameObject.Find("Data Persistence Manager");
-        if (go != null)
-        {
-            DataPersistenceManager.Instance.LoadInfo();
-            Debug.Log(DataPersistenceManager.Instance.bestUserName);
-            Debug.Log(DataPersistenceManager.Instance.bestScore);
-        }        
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -76,8 +66,6 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                DataPersistenceManager.Instance.SaveInfo();
-
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
@@ -87,12 +75,20 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
-        BestScore = m_Points;
+        allScore = m_Points;
     }
 
     public void GameOver()
     {
         m_GameOver = true;
-        GameOverText.SetActive(true);
+        GameOverText.SetActive(true);               
+
+        if (allScore > DataPersistenceManager.Instance.BestScore)
+        {
+            BestScore = allScore;
+
+            DataPersistenceManager.Instance.SaveData();
+            DataPersistenceManager.Instance.LoadData();
+        }
     }
 }
