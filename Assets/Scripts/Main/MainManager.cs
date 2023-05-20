@@ -10,6 +10,7 @@ public class MainManager : MonoBehaviour
     public int LineCount = 6;
     public Rigidbody Ball;
 
+    public Text BextScoreText;
     public Text ScoreText;
     public GameObject GameOverText;
     
@@ -18,14 +19,30 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    
+    public static string BestUserName;
+    public static int BestScore;
+
+    public DataPersistenceManager dataPersistenceManager;
+    public GameObject brickPrefabGroup;
+
+    private void Awake()
+    {
+        GameObject go = GameObject.Find("Data Persistence Manager");
+        if (go != null)
+        {
+            DataPersistenceManager.Instance.LoadInfo();
+            Debug.Log(DataPersistenceManager.Instance.bestUserName);
+            Debug.Log(DataPersistenceManager.Instance.bestScore);
+        }        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
-        
-        int[] pointCountArray = new [] {1,1,2,2,5,5};
+
+        int[] pointCountArray = new[] { 1, 1, 2, 2, 5, 5 };
         for (int i = 0; i < LineCount; ++i)
         {
             for (int x = 0; x < perLine; ++x)
@@ -34,6 +51,8 @@ public class MainManager : MonoBehaviour
                 var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
                 brick.PointValue = pointCountArray[i];
                 brick.onDestroyed.AddListener(AddPoint);
+
+                brick.transform.SetParent(brickPrefabGroup.transform);
             }
         }
     }
@@ -57,6 +76,8 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                DataPersistenceManager.Instance.SaveInfo();
+
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
@@ -66,6 +87,7 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+        BestScore = m_Points;
     }
 
     public void GameOver()
