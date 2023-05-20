@@ -12,7 +12,7 @@ public class DataPersistenceManager : MonoBehaviour
     public string BestUser;
     public int BestScore; // new variable declared
 
-    public static int BestUserScore;
+    public string UserName;
 
     private void Awake()
     {
@@ -33,6 +33,11 @@ public class DataPersistenceManager : MonoBehaviour
     private void Start()
     {
         
+    }
+
+    private void Update()
+    {
+        UserName = MenuUtils.UserName;
     }
 
     [System.Serializable]
@@ -63,8 +68,6 @@ public class DataPersistenceManager : MonoBehaviour
 
             BestUser = data.BestUser;
             BestScore = data.BestScore;
-
-            Debug.Log(BestScore);
         }
     }
 }

@@ -152,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb0f60d9e8191b4794a050e00e29a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BestScore: 10
+  BestUser: 
+  BestScore: 0
+  UserName: 
 --- !u!4 &28792829
 Transform:
   m_ObjectHideFlags: 0
@@ -1194,8 +1196,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Best Score
 --- !u!222 &1957555046
@@ -1249,6 +1251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10ef506f0ad94f409496e5cb09cbff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bestScore: {fileID: 1957555045}
+  userNameInputField: {fileID: 2087292474}
+  startButton: {fileID: 1788254275}
 --- !u!1 &2087292472
 GameObject:
   m_ObjectHideFlags: 0

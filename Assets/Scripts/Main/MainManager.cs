@@ -11,7 +11,7 @@ public class MainManager : MonoBehaviour
     public int LineCount = 6;
     public Rigidbody Ball;
 
-    public Text BextScoreText;
+    public Text BestScoreText;
     public Text ScoreText;
     public GameObject GameOverText;
     
@@ -29,6 +29,8 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BestScoreText.text = $"Best Score : {DataPersistenceManager.Instance.BestUser} : {DataPersistenceManager.Instance.BestScore}";
+
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
 
@@ -86,6 +88,9 @@ public class MainManager : MonoBehaviour
         if (allScore > DataPersistenceManager.Instance.BestScore)
         {
             BestScore = allScore;
+            BestName = DataPersistenceManager.Instance.UserName;
+
+            BestScoreText.text = $"Best Score : {DataPersistenceManager.Instance.UserName} : {BestScore}";
 
             DataPersistenceManager.Instance.SaveData();
             DataPersistenceManager.Instance.LoadData();
